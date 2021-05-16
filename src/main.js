@@ -1,10 +1,13 @@
 import Vue from 'vue'
-import App from './App.vue'
 import router from './router'
 import store from './store'
+import 'normalize.css/normalize.css'
+import '@/style/index.scss'
+import '@/mock'
+import layout from '@/components/index.js'
+import App from './App.vue'
 
-Vue.config.productionTip = false
-
+Vue.use(layout)
 new Vue({
   router,
   store,
