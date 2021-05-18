@@ -2,6 +2,14 @@
 export default {
   name: 'CBox',
   props: {
+    width: {
+      type: [String, Number],
+      default: 'auto',
+    },
+    height: {
+      type: [String, Number],
+      default: 'auto',
+    },
     tag: {
       type: String,
       default: 'div',
@@ -22,10 +30,21 @@ export default {
       type: String,
       default: null,
     },
+    wrap: {
+      type: String,
+      default: 'no-wrap',
+    },
   },
   computed: {
+    calcStyle() {
+      return {
+        width: this.width + 'px',
+        height: this.height + 'px',
+      };
+    },
     calcClass() {
-      let vertical, horizontal, border;
+      let vertical, horizontal, border, wrap;
+
       switch (this.border) {
         case 'top':
           border = 'c-box--border-top';
@@ -41,6 +60,14 @@ export default {
           break;
         case 'all':
           border = 'c-box--border-all';
+          break;
+      }
+      switch (this.wrap) {
+        case 'no-wrap':
+          wrap = 'c-box--no-wrap';
+          break;
+        case 'wrap':
+          wrap = 'c-box--wrap';
           break;
       }
       if (!this.center) {
@@ -72,15 +99,16 @@ export default {
             horizontal = 'c-box--around';
             break;
         }
-        return [vertical, horizontal, border];
+        console.log(border);
+        return [vertical, horizontal, border, wrap];
       }
-      return ['c-box--center', border];
+      return ['c-box--center', border, wrap];
     },
   },
   render(h) {
     return h(
       this.tag,
-      { class: ['c-box', ...this.calcClass] },
+      { class: ['c-box', ...this.calcClass], style: this.calcStyle },
       this.$slots.default,
     );
   },
@@ -90,6 +118,13 @@ export default {
 <style lang="scss" scoped>
 @include b(c-box) {
   display: flex;
+  /*换行*/
+  @include m(no-wrap) {
+    flex-wrap: nowrap;
+  }
+  @include m(wrap) {
+    flex-wrap: wrap;
+  }
   /*边框*/
   @include m(border-top) {
     border-top: $border-base;
