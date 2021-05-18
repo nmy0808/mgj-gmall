@@ -3,8 +3,9 @@ import 'vant/lib/row/index.css'
 import Col from 'vant/lib/col'
 import Row from 'vant/lib/row'
 import { Layout, Header, Aside, Content, Footer } from '@/components/layout/index.js'
+import CBox from './box'
 const components = [
-  Col, Row, Layout, Header, Aside, Content, Footer
+  Col, Row, Layout, Header, Aside, Content, Footer, CBox
 ];
 export default {
   install(Vue) {

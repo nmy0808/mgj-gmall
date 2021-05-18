@@ -1,16 +1,21 @@
 <template>
   <div id="app">
-    <div font-secondary>112rewfwef324</div>
-    <c-row>
-      <c-col font-secondary span="8">span: 8</c-col>
-      <c-col span="8">span: 8</c-col>
-      <c-col span="8">span: 8</c-col>
-    </c-row>
+    <c-box class="box" tag="ul" horizontal="between" vertical="top" border="right">
+      <span>1</span>
+      <span>1</span>
+      <span>1</span>
+      <span>1</span>
+    </c-box>
   </div>
 </template>
 <script>
-import { getBanners } from "@/api/mall.js";
+import { getBanners } from '@/api/mall.js';
+import { OverallReduction } from '@icon-park/vue';
+
 export default {
+  components: {
+    OverallReduction,
+  },
   mounted() {
     getBanners().then((res) => {
       console.log(res);
@@ -20,9 +25,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .box {
-  color: $color-primary;
-  background: rgba($color: #000000, $alpha: 40%);
-  height: 100px;
-  @include box-center(center, center);
+  width: 200px;
+  height: 200px;
 }
 </style>
