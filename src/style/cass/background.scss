@@ -9,3 +9,9 @@
     background-color: #{nth($style, 2)};
   }
 }
+[bg-w]{
+  background: white;
+}
+[bg-b]{
+  background: black;
+}

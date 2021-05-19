@@ -34,6 +34,10 @@ export default {
       type: String,
       default: 'no-wrap',
     },
+    direction: {
+      type: String,
+      default: 'row',
+    },
   },
   computed: {
     calcStyle() {
@@ -43,8 +47,15 @@ export default {
       };
     },
     calcClass() {
-      let vertical, horizontal, border, wrap;
-
+      let vertical, horizontal, border, wrap, direction;
+      switch (this.direction) {
+        case 'row':
+          direction = 'c-box--direction-row';
+          break;
+        case 'col':
+          direction = 'c-box--direction-col';
+          break;
+      }
       switch (this.border) {
         case 'top':
           border = 'c-box--border-top';
@@ -99,10 +110,9 @@ export default {
             horizontal = 'c-box--around';
             break;
         }
-        console.log(border);
-        return [vertical, horizontal, border, wrap];
+        return [vertical, horizontal, border, wrap, direction];
       }
-      return ['c-box--center', border, wrap];
+      return ['c-box--center', border, wrap, direction];
     },
   },
   render(h) {
@@ -118,6 +128,7 @@ export default {
 <style lang="scss" scoped>
 @include b(c-box) {
   display: flex;
+  box-sizing: border-box;
   /*换行*/
   @include m(no-wrap) {
     flex-wrap: nowrap;
@@ -172,6 +183,13 @@ export default {
   @include m(center) {
     align-items: center;
     justify-content: center;
+  }
+  /*方向*/
+  @include m(direction-col) {
+    flex-direction: column;
+  }
+  @include m(direction-row) {
+    flex-direction: row;
   }
 }
 </style>
