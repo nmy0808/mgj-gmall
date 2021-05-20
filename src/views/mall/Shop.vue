@@ -6,7 +6,15 @@
         <Search />
       </c-header>
       <c-content>
-        <Carousel :list="bannerList" bg-w />
+        <c-row gutter="8" ph8 bg-w pv8>
+          <template v-for="it in promotions" >
+            <c-col span="6" :key="it.title">
+              <c-magazine class="magazine" :image="it.image" radius6>
+                <div class="magazine__item" fz18>{{ it.title }}</div>
+              </c-magazine>
+            </c-col>
+          </template>
+        </c-row>
         <Category :list="categoryList" bg-w mb5 />
         <Good :list="brandVideoList" />
       </c-content>
@@ -22,6 +30,7 @@ import {
   getRecommendatoryCategorys,
   getBanners,
   getBrandVideos,
+  getPromotions,
 } from '@/api/mall';
 import Launch from '@/components/launch';
 import Search from './Search';
@@ -38,6 +47,7 @@ export default {
       categoryList: [], //推荐类目
       bannerList: [], //轮播图
       brandVideoList: [], //所有品类视频列表
+      promotions: [],
     };
   },
   async mounted() {
@@ -47,9 +57,24 @@ export default {
     this.bannerList = bannerList.data;
     const brandVideoList = await getBrandVideos();
     this.brandVideoList = brandVideoList.data[0].list;
+    const promotions = await getPromotions();
+    this.promotions = promotions.data;
+    console.log(promotions.data);
   },
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+@include b(magazine) {
+  @include dimensions(82.5px);
+  @include e(item) {
+    position: absolute;
+    bottom: 0.5em;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    color: white;
+    font-size: 14px;
+  }
+}
 </style>

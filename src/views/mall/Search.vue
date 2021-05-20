@@ -1,5 +1,5 @@
 <template>
-  <c-box class="search" ph15 horizontal="between" vertical="center">
+  <c-box class="search" ph15 horizontal="between" vertical="center" border="bottom">
     <hamburger-button theme="filled" size="24" fill="#d0d0d0" />
     <c-box class="search__center" border="all" radius4 vertical="center">
       <search theme="outline" size="16" ph6 fill="#d0d0d0" />
