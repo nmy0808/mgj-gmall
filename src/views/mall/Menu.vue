@@ -6,9 +6,9 @@
       v-for="it in menus"
       align="center"
       justify="center"
-      :key="it"
+      :key="it.name"
     >
-      {{ it }}
+      <router-link :to="{ name: it.name }" exact>{{ it['text'] }}</router-link>
     </c-col>
   </c-row>
 </template>
@@ -18,7 +18,12 @@ export default {
   name: 'CMenu',
   data() {
     return {
-      menus: ['首页', '商城', '直播', '我'],
+      menus: [
+        { text: '首页', name: 'Home' },
+        { text: '商城', name: 'Shop' },
+        { text: '直播', name: 'Live' },
+        { text: '我', name: 'Me' },
+      ],
     };
   },
 };
